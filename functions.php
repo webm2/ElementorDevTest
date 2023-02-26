@@ -129,7 +129,7 @@ function products_custom_meta_boxes()
 function product_main_image_callback($post)
 {
     // Retrieve the current value of the main image custom field
-    $main_image = get_post_meta($post->ID, 'product-main-image', true);
+    $main_image = get_post_meta($post->ID, '_product_main_image', true);
     // Output the HTML for the main image meta box
     ?>
     <p>
@@ -306,65 +306,66 @@ function product_image_gallery_upload_callback()
 }
 
 
-// // Add custom meta boxes for the products custom post type
-// add_action('add_meta_boxes_products', 'add_products_custom_meta_boxes');
-// function add_products_custom_meta_boxes()
-// {
-//     // Main image meta box
-//     add_meta_box(
-//         'product-main-image',
-//         'Main Image',
-//         'product_main_image_callback',
-//         'products',
-//         'normal',
-//         'default'
-//     );
-//     // Image gallery meta box
-//     add_meta_box(
-//         'product-image-gallery',
-//         'Image Gallery',
-//         'product_image_gallery_callback',
-//         'products',
-//         'normal',
-//         'default'
-//     );
-//     // Price meta box
-//     add_meta_box(
-//         'product-price',
-//         'Price',
-//         'product_price_callback',
-//         'products',
-//         'normal',
-//         'default'
-//     );
-//     // Sale price meta box
-//     add_meta_box(
-//         'product-sale-price',
-//         'Sale Price',
-//         'product_sale_price_callback',
-//         'products',
-//         'normal',
-//         'default'
-//     );
-//     // YouTube video meta box
-//     add_meta_box(
-//         'product-youtube-video',
-//         'YouTube Video',
-//         'product_youtube_video_callback',
-//         'products',
-//         'normal',
-//         'default'
-//     );
-//     // Is on sale meta box
-//     add_meta_box(
-//         'product-is-on-sale',
-//         'Is On Sale?',
-//         'product_is_on_sale_callback',
-//         'products',
-//         'side',
-//         'default'
-//     );
-// }
+// Add custom meta boxes for the products custom post type
+add_action('add_meta_boxes_products', 'add_products_custom_meta_boxes');
+function add_products_custom_meta_boxes()
+{
+    // Main image meta box
+    add_meta_box(
+        'product-main-image',
+        'Main Image',
+        'product_main_image_callback',
+        'products',
+        'normal',
+        'default'
+    );
+    // Image gallery meta box
+    add_meta_box(
+        'product-image-gallery',
+        'Image Gallery',
+        'product_image_gallery_callback',
+        'products',
+        'normal',
+        'default'
+    );
+    // Price meta box
+    add_meta_box(
+        'product-price',
+        'Price',
+        'product_price_callback',
+        'products',
+        'normal',
+        'default'
+    );
+    // Sale price meta box
+    add_meta_box(
+        'product-sale-price',
+        'Sale Price',
+        'product_sale_price_callback',
+        'products',
+        'normal',
+        'default'
+    );
+    // YouTube video meta box
+    add_meta_box(
+        'product-youtube-video',
+        'YouTube Video',
+        'product_youtube_video_callback',
+        'products',
+        'normal',
+        'default'
+    );
+    // Is on sale meta box
+    add_meta_box(
+        'product-is-on-sale',
+        'Is On Sale?',
+        'product_is_on_sale_callback',
+        'products',
+        'side',
+        'default'
+    );
+}
+
 // hide Gutenburg blocks on the product custom post type
 add_filter('use_block_editor_for_post_type', 'prefix_disable_gutenberg', 10, 2);
 function prefix_disable_gutenberg($current_status, $post_type)
